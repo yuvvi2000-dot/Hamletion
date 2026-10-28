@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Hamletion</title>
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+<style>
+:root,:root[data-theme=dark]{--bg:#0d1517;--bg2:#16262a;--ink:#e7e0cb;--mute:#9aa79f;--gold:#c9a24b;--line:#35504f;--ghost:#9fe0d4;--rose:#b4637a;color-scheme:dark}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#e9e1cb;--bg2:#f3edd9;--ink:#1d2a2a;--mute:#556360;--gold:#7a5a14;--line:#a9a58b;--ghost:#1e6b62;--rose:#8d3a55;color-scheme:light}}
+:root[data-theme=light]{--bg:#e9e1cb;--bg2:#f3edd9;--ink:#1d2a2a;--mute:#556360;--gold:#7a5a14;--line:#a9a58b;--ghost:#1e6b62;--rose:#8d3a55;color-scheme:light}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;min-height:100vh;background:radial-gradient(120% 70% at 50% 0,var(--bg2),var(--bg));color:var(--ink);font:24px/1.3 VT323,'Courier New',monospace}
+#shaft{position:fixed;left:0;top:0;bottom:0;width:10px;background:#0005;border-right:1px solid var(--line)}
+#fill{position:absolute;left:0;right:0;top:0;height:0;background:linear-gradient(var(--gold),var(--rose));transition:height .9s}
+#six{position:absolute;top:10%;left:0;width:18px;height:1px;background:var(--ghost)}
+main{max-width:620px;margin:0 auto;padding:30px 22px 60px 36px}
+h1{font-size:clamp(56px,16vw,104px);font-style:italic;font-weight:400;line-height:1;margin:.3em 0 .1em}
+h2{font-size:30px;font-weight:400;line-height:1.2;margin:0 0 10px}
+h3{font-weight:400;font-size:21px;margin:18px 0 6px}
+p{margin:0 0 14px}
+.ghost{color:var(--ghost);font-style:italic;font-size:26px;opacity:0;animation:fade 3.5s .6s forwards}
+@keyframes fade{to{opacity:1}}
+.card{background:var(--bg2);border:1px solid var(--line);border-left:6px solid var(--t,var(--gold));padding:22px;margin:18px 0}
+button{font:inherit;background:var(--gold);color:#14201f;border:0;padding:12px 24px;cursor:pointer;min-height:44px}
+button.q{background:none;color:var(--mute);text-decoration:underline;padding:6px 0;min-height:0}
+input{font:inherit;font-size:24px;width:100%;padding:12px;background:transparent;color:var(--ink);border:1px solid var(--line);border-bottom:2px solid var(--gold);border-radius:0}
+:focus-visible{outline:3px solid var(--ghost);outline-offset:2px}
+.hud{display:flex;justify-content:space-between;gap:12px;color:var(--mute);font-size:18px}
+.bar{height:3px;background:var(--line);margin:12px 0 6px}.bar i{display:block;height:100%;width:100%;background:var(--ghost)}
+#err{min-height:30px;color:var(--rose);margin:8px 0 0;font-size:18px}
+.chip{display:inline-block;background:var(--t);color:#14201f;padding:0 10px;font-size:17px;margin:2px 6px 2px 0}
+.sh{animation:sh .25s}@keyframes sh{25%,75%{transform:translateX(-5px)}50%{transform:translateX(5px)}}
+.big{font-size:64px;font-style:italic;line-height:1.1;margin:6px 0}
+.ans{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding:3px 6px;font-size:18px}
+.ans.me{background:color-mix(in srgb,var(--ghost) 18%,transparent)}
+details{border-bottom:1px solid var(--line);padding:10px 0}summary{cursor:pointer}
+.tier{color:var(--mute);font-size:17px;margin:12px 0 2px}
+.row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:18px}
+@media(prefers-reduced-motion:reduce){#fill{transition:none}.ghost{animation:none;opacity:1}.sh{animation:none}}
+:root:root:root:root{--bg:#0d1517;--bg2:#16262a;--ink:#e7e0cb;--mute:#9aa79f;--gold:#e8c35f;--line:#35504f;--ghost:#9fe0d4;--rose:#ff6b9a;color-scheme:dark}
+body{background:#050b18}
+#scene{position:fixed;inset:0;width:100%;height:100%;image-rendering:pixelated;z-index:0}
+#scan{position:fixed;inset:0;pointer-events:none;z-index:9;opacity:.4;background:repeating-linear-gradient(0deg,#00102130 0,#00102130 1px,transparent 1px,transparent 3px)}
+#shaft{display:none}main{position:relative;z-index:2}
+h1{font-style:normal;letter-spacing:6px;color:#f4efd8;text-shadow:-4px 3px var(--rose),4px -2px var(--ghost);font-size:clamp(52px,13vw,96px)}
+.ghost{font-size:30px}
+.card{border:0;box-shadow:inset 6px 0 var(--t,var(--gold));background:#0c182bec;clip-path:polygon(0 8px,4px 8px,4px 4px,8px 4px,8px 0,calc(100% - 8px) 0,calc(100% - 8px) 4px,calc(100% - 4px) 4px,calc(100% - 4px) 8px,100% 8px,100% calc(100% - 8px),calc(100% - 4px) calc(100% - 8px),calc(100% - 4px) calc(100% - 4px),calc(100% - 8px) calc(100% - 4px),calc(100% - 8px) 100%,8px 100%,8px calc(100% - 4px),4px calc(100% - 4px),4px calc(100% - 8px),0 calc(100% - 8px))}
+button{letter-spacing:2px;box-shadow:3px 3px 0 #0008}button.q{box-shadow:none}
+input{background:#081426}
+details{background:#0b172bd0;padding:10px 14px;margin-top:8px}
+.hud{text-shadow:2px 2px #000}
+</style></head><body><canvas id="scene" aria-hidden="true"></canvas><div id="scan" aria-hidden="true"></div>
+<div id="shaft" aria-hidden="true"><i id="fill"></i><b id="six"></b></div>
+<main id="app"></main>
+<script>
+"use strict";
+const T=[["Groundling",10,"#cfc8b4","Everyone in the pit says this."],["Player",25,"#c9a24b","A line well delivered."],["Courtier",50,"#8aa37b","Polished, and a little rare."],["Scholar",75,"#b4637a","Wittenberg would approve."],["Ghost",100,"#9fe0d4","Rarer than a spirit on the battlements."]];
+const SEC=25;
+const RAW=[
+["Name a character who dies in Hamlet.",["Hamlet~0~Prince Hamlet","Ophelia~0","Claudius~1~King Claudius","Polonius~1","Gertrude~1~Queen Gertrude","Laertes~2","Rosencrantz~3","Guildenstern~3"]],
+["Name a way someone dies in Hamlet.",["Poison~0","Sword~0~Stabbing|Stabbed|Rapier|Duel|Swordfight","Drowning~1~Drowned","Stabbed through a curtain~2~Behind the arras|Arras|Behind the curtain|Curtain","Execution~3~Executed|Hanged|Beheaded|Execution in England","Poison in the ear~4~Poured in the ear|Poison poured in the ear|Ear"]],
+["Name something you’d find in the graveyard scene (Act 5, Scene 1).",["Skull~0~Skulls","Grave~0~Graves|Gravestone","Gravedigger~1~Gravediggers|Grave digger|Clown","Horatio~1","Yorick~2~Yoricks skull|Jester","Ophelia’s funeral~2~Ophelia|Funeral|Burial|Coffin","Alexander the Great~3~Alexander","Caesar~4~Julius Caesar|Imperious Caesar"]],
+["Name a theme of Hamlet.",["Death~0~Mortality","Revenge~0~Vengeance","Madness~1~Insanity|Feigned madness","Corruption~1~Decay|Rot|Rottenness","Duty~2~Honor|Honour|Obligation","Doubt~2~Uncertainty|Indecision|Procrastination|Hesitation","Appearance versus reality~3~Appearance vs reality|Seeming|Acting|Deception|Appearance and reality","Fate~3~Providence|Destiny","The meaning of life~4~Meaning|Existentialism|Nihilism|Purpose"]],
+["Name an image Hamlet uses for the world or for humankind.",["A prison~0~Prison|Denmark is a prison","An unweeded garden~1~Garden|Unweeded garden|Weeds|A garden","Quintessence of dust~2~Dust|Quintessence|Clay","A piece of work~2~Piece of work|Paragon of animals|Paragon|Noble in reason","A sterile promontory~3~Promontory|Barren cliff|Cliff","A nutshell~4~Nutshell|Bounded in a nutshell|King of infinite space","A foul and pestilent congregation of vapours~4~Vapours|Vapors|Pestilent vapours|Foul vapors"]],
+["Name an object that appears onstage in Hamlet.",["Skull~0~Yoricks skull","Sword~0~Swords|Rapier|Rapiers|Foil|Foils","Cup~1~Goblet|Chalice|Poisoned cup|Wine","Crown~1~Crowns","Book~1~Books","Letter~2~Letters","Flowers~2~Rosemary|Pansies|Flower|Rue|Violets","Recorder~3~Recorders|Flute|Pipe","Pearl~4~The pearl|Union"]]
+];
+const Q=RAW.map(([p,a])=>({p,a:a.map(x=>{const[t,k,al]=x.split("~");return{t,k:+k,al:al?al.split("|"):[]}})}));
+const $=s=>document.querySelector(s),app=$("#app");
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const norm=s=>s.normalize("NFKC").toLowerCase().replace(/[^\p{L}\p{N} ]/gu,"").trim().replace(/\s+/g," ");
+const near=(a,b)=>{if(Math.abs(a.length-b.length)>1||Math.min(a.length,b.length)<5)return false;let i=0,j=0,m=0;while(i<a.length&&j<b.length){if(a[i]===b[j]){i++;j++}else{if(++m>1)return false;if(a.length>b.length)i++;else if(a.length<b.length)j++;else{i++;j++}}}return m+(a.length-i)+(b.length-j)<=1};
+const ft=p=>(p/5).toFixed(1);
+let S=null;
+function depth(){$("#fill").style.height=Math.min(100,(S?S.total:0)/3)+"%"}
+function home(){if(S)clearInterval(S.tm);S=null;depth();
+app.innerHTML=`<h1>Hamletion</h1><p class="ghost">“Remember me.”</p><p>Mortality and meaning, in ${Q.length} questions. Every prompt has many right answers. Common ones are worth little; the rarest dig you deepest. Six feet is a proper grave, so see how far past it you can go.</p><div>${T.map(t=>`<span class="chip" style="--t:${t[2]}">${t[0]} · ${t[1]} pts</span>`).join("")}</div><div class="row"><button id="go">Begin the dig</button></div>`;
+$("#go").onclick=start}
+function start(){S={i:0,total:0,res:[]};depth();round()}
+function round(){const q=Q[S.i];S.end=Date.now()+SEC*1e3;
+app.innerHTML=`<div class="hud"><span>Question ${S.i+1} of ${Q.length}</span><span>${ft(S.total)} ft down</span></div><div class="card"><h2>${esc(q.p)}</h2><small>Type one answer. Rarer answers dig deeper.</small></div><form id="f" autocomplete="off"><input id="g" spellcheck="false" maxlength="100" aria-label="Your answer"><p id="err" role="status"></p><div class="bar"><i id="b"></i></div><div class="hud"><span id="c">${SEC}</span><button type="button" class="q" id="sk">Skip this question</button></div><div class="row"><button>Answer</button></div></form>`;
+$("#g").focus();$("#sk").onclick=()=>fin(null);
+S.tm=setInterval(()=>{const ms=S.end-Date.now();if(ms<=0)return fin(null);$("#c").textContent=Math.ceil(ms/1e3);$("#b").style.width=ms/(SEC*10)+"%"},100);
+$("#f").onsubmit=e=>{e.preventDefault();const raw=$("#g").value.trim();if(!raw)return;const n=norm(raw),all=q.a.map(x=>[x,[x.t,...x.al].map(norm)]);
+let hit=all.find(([x,s])=>s.includes(n)),fix=false;if(!hit){hit=all.find(([x,s])=>s.some(v=>near(n,v)));fix=true}
+if(!hit){$("#err").textContent=`“${raw}” isn’t among the answers. Try another while the clock runs.`;const g=$("#g");g.classList.remove("sh");void g.offsetWidth;g.classList.add("sh");g.select();return}
+fin(hit[0],raw,fix)}}
+function fin(a,raw,fix){clearInterval(S.tm);const t=a?T[a.k]:null,pts=t?t[1]:0;S.total+=pts;S.res.push({a,pts});depth();const last=S.i+1===Q.length;
+app.innerHTML=`<div class="hud"><span>Question ${S.i+1} of ${Q.length}</span><span>${ft(S.total)} ft down</span></div><div class="card" style="--t:${t?t[2]:"var(--line)"}"><p>${t?ico(a.k)+`<span class="chip" style="--t:${t[2]}">${t[0]}</span>`:""}</p><h2>${a?esc(a.t):"No answer this time"}</h2><p>${t?`${esc(t[3])} ${fix?"(Spelling corrected.) ":""}You dig ${ft(pts)} feet deeper.`:"The clock ran out, or you let it pass. The grave stays as deep as it was."}</p></div><div class="row"><button id="nx">${last?"See how deep you went":"Next question"}</button></div>`;
+$("#nx").focus();$("#nx").onclick=()=>{S.i++;last?results():round()}}
+function results(){const t=S.total,f=ft(t),m=Q.reduce((s,q)=>s+Math.max(...q.a.map(a=>T[a.k][1])),0);
+const verdict=t<30?"Not yet six feet. The gravediggers have barely begun.":t<100?"A proper grave: six feet and a little more.":"Deeper than Yorick. The gravedigger tips his spade.";
+app.innerHTML=`<h1>${f} ft</h1><p class="ghost" style="animation:none;opacity:1">${verdict}</p><p>${t} of ${m} possible points · ${S.res.filter(r=>r.a).length} of ${Q.length} questions answered</p><div class="row"><button id="again">Dig again</button><button class="q" id="hm">Back to the start</button></div><h3>Every answer, by depth</h3>`+Q.map((q,i)=>{const r=S.res[i];return `<details><summary>${i+1}. ${esc(q.p)} <span class="chip" style="--t:${r.a?T[r.a.k][2]:"#777"}">${r.a?esc(r.a.t)+" · "+r.pts:"missed"}</span></summary>${T.map((tt,k)=>{const l=q.a.filter(a=>a.k===k);return l.length?`<div class="tier">${tt[0]} · ${tt[1]} pts</div>`+l.map(a=>`<div class="ans${r.a===a?" me":""}"><span>${esc(a.t)}</span>${r.a===a?"<span>your answer</span>":""}</div>`).join(""):""}).join("")}</details>`}).join("");
+$("#again").onclick=start;$("#hm").onclick=home;window.scrollTo(0,0)}
+const SP=["..1111..|.122221.|12211221|12122121|12122121|12211221|.122221.|..1111..","11111111|12222221|12.22.21|12222221|12.22.21|.122..21|..1222.1|...111..","1..1.1.1|12121221|11111111|12222221|12222221|11111111|........|........",".111111.|12222221|12.11.21|12.11.21|12.11.21|12.11.21|12222221|.111111.","..1111..|.111111.|11.11.11|11.11.11|11111111|11111111|11.11.11|1..1..1."];
+function ico(k){const c=document.createElement("canvas");c.width=c.height=8;const x=c.getContext("2d");SP[k].split("|").forEach((r,y)=>[...r].forEach((ch,i)=>{if(ch!=="."){x.fillStyle=ch==="1"?T[k][2]:"#14201f";x.fillRect(i,y,1,1)}}));return `<img src="${c.toDataURL()}" width="64" height="64" alt="" style="image-rendering:pixelated;display:block;margin-bottom:8px">`}
+const cv=$("#scene"),cx=cv.getContext("2d");let W,H,dep=0;
+const rs=()=>{W=Math.ceil(innerWidth/3);H=Math.ceil(innerHeight/3);cv.width=W;cv.height=H;cx.imageSmoothingEnabled=false};addEventListener("resize",rs);rs();
+const R=(x,y,w,h,c)=>{cx.fillStyle=c;cx.fillRect(x|0,y|0,w|0,h|0)};
+const rnd=n=>{const x=Math.sin(n*127.1)*43758.5;return x-Math.floor(x)};
+const RM=matchMedia("(prefers-reduced-motion:reduce)").matches,EC=["#3b2a1d","#2e2218","#26211f","#1c1f24","#14191f","#0d1117"];
+function frame(t){if(RM)t=0;dep+=((S?S.total:0)*1.6-dep)*(RM?1:.04);const sy=H*.5-dep;cx.clearRect(0,0,W,H);
+if(sy>0){const g=cx.createLinearGradient(0,0,0,sy);g.addColorStop(0,"#050b18");g.addColorStop(1,"#1d3f52");cx.fillStyle=g;cx.fillRect(0,0,W,sy);
+for(let i=0;i<40;i++)R(rnd(i+9)*W,rnd(i)*sy*.9,1,1,(t/400+i)%5<4?"#c9d9e8":"#5d7186");
+R(W*.78,sy-H*.42,14,14,"#e9e2c4");R(W*.78+3,sy-H*.42-2,8,18,"#e9e2c4");
+const c0=W*.1,K="#0a1220";R(c0,sy-46,70,46,K);for(let i=0;i<7;i++)R(c0+i*10,sy-50,5,4,K);R(c0+8,sy-78,14,32,K);R(c0+46,sy-90,14,44,K);R(c0+6,sy-82,18,4,K);R(c0+44,sy-95,18,5,K);
+R(c0+13,sy-66,3,5,"#e8c35f");R(c0+51,sy-76,3,5,"#e8c35f");R(c0+30,sy-26,4,6,"#e8c35f");
+for(let i=0;i<5;i++){const x=W*.45+i*14;R(x,sy-12,6,12,"#27384a");R(x+1,sy-14,4,2,"#27384a")}
+const gy=sy-40+Math.sin(t/700)*3,gx=W*.62+Math.sin(t/1300)*6;R(gx,gy,10,12,"#9fe0d4aa");R(gx-1,gy+4,12,8,"#9fe0d4aa");R(gx+2,gy+3,2,2,"#050b18");R(gx+6,gy+3,2,2,"#050b18");
+R(0,sy-4,W,5,"#9fe0d422")}
+for(let b=0;b<40;b++){const y0=sy+b*24;if(y0>H)break;if(y0+24<0)continue;R(0,y0,W,24,EC[Math.min(b,5)]);
+for(let i=0;i<14;i++)R(rnd(i+b*7)*W,y0+rnd(i*3+b)*24,2,1,"#ffffff12");
+if(b>0&&rnd(b*5)>.35){const x=rnd(b*11)*W*.8+W*.05,y=y0+4+rnd(b)*12;R(x,y,5,4,"#d8d2bd");R(x+1,y+4,3,1,"#d8d2bd");R(x+1,y+1,1,1,"#000");R(x+3,y+1,1,1,"#000")}
+if(b===3)R(W*.62,y0+8,18,8,"#4a3320")}
+requestAnimationFrame(frame)}
+requestAnimationFrame(frame);
+home();
+</script></body></html>
